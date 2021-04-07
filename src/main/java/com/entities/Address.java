@@ -1,6 +1,7 @@
 package com.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,7 +18,10 @@ public class Address {
 
     private String state;
 
-    @OneToOne(optional = false, mappedBy = "address")
+    private String country;
+
+    @JsonIgnore
+    @OneToOne(optional = true, fetch = FetchType.LAZY)
     private Customer customer;
 
 }

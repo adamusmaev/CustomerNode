@@ -2,7 +2,6 @@ package com.entities;
 
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -18,6 +17,4 @@ public class PaidType {
 
     @ManyToMany(mappedBy = "paidTypes")
     private Collection<Customer> customers;
-
-
 }

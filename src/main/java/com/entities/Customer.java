@@ -27,7 +27,7 @@ public class Customer {
     @NaturalId
     private String phoneNumber;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(optional = true, mappedBy = "customer", fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id")
     private Address address;
 
