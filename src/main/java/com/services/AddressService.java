@@ -11,13 +11,19 @@ public class AddressService {
     @Autowired
     public AddressRepo addressRepo;
 
-    public void saveAddress(Address address)
-    {
+    public void saveAddress(Address address) {
         addressRepo.save(address);
     }
 
-    public Address findAddress(Integer id)
-    {
+    public Address findAddress(Integer id) {
         return addressRepo.findAddressById(id);
+    }
+
+    public Iterable<Address> findAllAddresses() {
+        return addressRepo.findAll();
+    }
+    public void deleteAddress(Address address)
+    {
+        addressRepo.delete(address);
     }
 }

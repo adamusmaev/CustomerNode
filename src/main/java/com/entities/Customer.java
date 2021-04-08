@@ -1,6 +1,7 @@
 package com.entities;
 
 
+import com.detailsrequestmodel.CustomerDetailsRequestModel;
 import lombok.Data;
 import org.hibernate.annotations.NaturalId;
 
@@ -27,14 +28,26 @@ public class Customer {
     @NaturalId
     private String phoneNumber;
 
-    @OneToOne(optional = true, mappedBy = "customer", fetch = FetchType.LAZY)
+    public Customer() {
+    }
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id")
     private Address address;
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "CustomersPaidTypes",
-                joinColumns = @JoinColumn(name = "customer_id"),
-                inverseJoinColumns = @JoinColumn(name = "paidtype_id"))
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "paidtype_id"))
     private Collection<PaidType> paidTypes;
+
+    public void changeCustomer(CustomerDetailsRequestModel customerDRM)
+    {
+        this.setFirstName(customerDRM.getFirstName());
+        this.setLastName(customerDRM.getLastName());
+        this.setEmail(customerDRM.getEmail());
+        this.setPassword(customerDRM.getPassword());
+        this.setPhoneNumber(customerDRM.getPhoneNumber());
+    }
 }

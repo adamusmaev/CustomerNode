@@ -1,15 +1,17 @@
 package com.controllers;
 
+import com.detailsrequestmodel.PaidTypeDetailsRequestModel;
 import com.entities.Address;
 import com.entities.PaidType;
 import com.repo.PaidTypeRepo;
 import com.services.PaidTypeService;
+import com.transfers.PaidTypeTransfer;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -23,47 +25,49 @@ public class PaidTypeController {
         this.paidTypeService = paidTypeService;
     }
 
-    @GetMapping("/findPaidTypeById/")
-    public PaidType findPaidTypeById(@RequestBody Integer paidTypeId) {
+    @GetMapping("/findPaidTypeById")
+    @ResponseBody
+    public PaidTypeTransfer findPaidTypeById(@RequestBody Integer paidTypeId) {
         PaidType paidType = paidTypeService.findPaidTypeById(paidTypeId);
-        return paidTypeService.findPaidTypeById(paidTypeId);
+        PaidTypeTransfer paidTypeTransfer = new PaidTypeTransfer(paidType);
+        return paidTypeTransfer;
     }
 
     @GetMapping("/findAllPaidType")
-    public Iterable<PaidType> findAll()
-    {
-        return paidTypeService.findAllPaidType();
+    @ResponseBody
+    public List<PaidTypeTransfer> findAll() {
+        List<PaidTypeTransfer> paidTypeTransfers = new ArrayList<>();
+        for (PaidType p : paidTypeService.findAllPaidType()) {
+            PaidTypeTransfer paidTypeTransfer = new PaidTypeTransfer(p);
+            paidTypeTransfers.add(paidTypeTransfer);
+        }
+        return paidTypeTransfers;
     }
 
-    @PostMapping("/addPaidType/{paidTypeName}")
-    public void addPaidType(@PathVariable String paidTypeName) {
+    @PostMapping("/addPaidType")
+    public void addPaidType(@RequestBody PaidTypeDetailsRequestModel paidTypeDRM) {
         PaidType paidType = new PaidType();
-        if (paidTypeName == null) log.error(new IllegalArgumentException("name is null"));
-        paidType.setName(paidTypeName);
+        paidType.setName(paidTypeDRM.getName());
         paidTypeService.savePaidType(paidType);
+        log.info("Add " + paidType.toString());
     }
 
-    @DeleteMapping("/deletePaidType/")
-    public void deletePaidType(@RequestBody PaidType paidType) {
-        /*PaidType paidType = findPaidTypeById(paidTypeId);
-        if (paidType == null) {
-            log.error(new IllegalArgumentException("PaidType not found"));
-            return;
-        }
-        if (paidType.getCustomers().isEmpty()) {
+    @DeleteMapping("/deletePaidType")
+    public void deletePaidType(@RequestParam Integer paidTypeId) {
+        PaidType paidType = paidTypeService.findPaidTypeById(paidTypeId);
+        if (!paidType.getCustomers().isEmpty()) log.error("This paid type hase customer");
+        else {
             paidTypeService.deletePaidType(paidType);
+            log.info("Delete paid type");
         }
-        else log.error(new IllegalArgumentException("Delete error"));*/
-        paidTypeService.deletePaidType(paidType);
-        log.info("@RequestBody");
     }
 
 
-    @PutMapping("/updatePaidType/{paidTypeId:\\d+}/{paidTypeName}")
-    public void updatePaidType(@PathVariable Integer paidTypeId, @PathVariable String paidTypeName)
-    {
-        PaidType paidType = findPaidTypeById(paidTypeId);
-        paidType.setName(paidTypeName);
+    @PutMapping("/updatePaidType")
+    public void updatePaidType(@RequestParam Integer paidTypeId, @RequestBody PaidTypeDetailsRequestModel paidTypeDRM) {
+        PaidType paidType = paidTypeService.findPaidTypeById(paidTypeId);
+        paidType.setName(paidTypeDRM.getName());
         paidTypeService.savePaidType(paidType);
+        log.info("Change paid type");
     }
 }

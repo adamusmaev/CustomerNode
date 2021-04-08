@@ -1,14 +1,17 @@
 package com.controllers;
 
+import com.detailsrequestmodel.AddressDetailsRequestModel;
 import com.entities.Address;
 import com.repo.AddressRepo;
 import com.services.AddressService;
+import com.transfers.AddressTransfer;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,20 +21,28 @@ public class AddressController {
 
     public final AddressService addressService;
 
-    public AddressController(AddressService addressService)
-    {
+    public AddressController(AddressService addressService) {
         this.addressService = addressService;
     }
 
     @PostMapping("/addAddress")
-    public void addAddress(@RequestParam String city,
-                           @RequestParam String country,
-                           @RequestParam String state)
-    {
+    public void addAddress(@RequestBody AddressDetailsRequestModel addressDRM) {
         Address address = new Address();
-        address.setCity(city);
-        address.setCountry(country);
-        address.setState(state);
+        address.setCity(addressDRM.getCity());
+        address.setCountry(addressDRM.getCountry());
+        address.setState(addressDRM.getState());
         addressService.saveAddress(address);
+        log.info("Add " + address.toString());
+    }
+
+    @GetMapping("/findAllAddresses")
+    @ResponseBody
+    public List<AddressTransfer> findAllAddresses() {
+        List<AddressTransfer> addressTransfers = new ArrayList<>();
+        for (Address a : addressService.findAllAddresses()) {
+                AddressTransfer addressTransfer = new AddressTransfer(a);
+                addressTransfers.add(addressTransfer);
+        }
+        return addressTransfers;
     }
 }

@@ -36,7 +36,6 @@ public class CustomerService {
     public void deleteCustomer(Customer customer)
     {
         Address address = customer.getAddress();
-        if (address == null) addressRepo.delete(address);
         customerRepo.delete(customer);
     }
 

@@ -20,8 +20,8 @@ public class Address {
 
     private String country;
 
-    @JsonIgnore
-    @OneToOne(optional = true, fetch = FetchType.LAZY)
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "address", cascade = CascadeType.ALL)
     private Customer customer;
 
 }
