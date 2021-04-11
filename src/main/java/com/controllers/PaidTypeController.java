@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/paidtypes",produces = MediaType.APPLICATION_JSON_VALUE)
 @Log4j
 public class PaidTypeController {
 
@@ -25,7 +25,7 @@ public class PaidTypeController {
         this.paidTypeService = paidTypeService;
     }
 
-    @GetMapping("/findPaidTypeById")
+    @GetMapping("/search")
     @ResponseBody
     public PaidTypeTransfer findPaidTypeById(@RequestBody Integer paidTypeId) {
         PaidType paidType = paidTypeService.findPaidTypeById(paidTypeId);
@@ -33,7 +33,7 @@ public class PaidTypeController {
         return paidTypeTransfer;
     }
 
-    @GetMapping("/findAllPaidType")
+    @GetMapping("/all")
     @ResponseBody
     public List<PaidTypeTransfer> findAll() {
         List<PaidTypeTransfer> paidTypeTransfers = new ArrayList<>();
@@ -44,7 +44,7 @@ public class PaidTypeController {
         return paidTypeTransfers;
     }
 
-    @PostMapping("/addPaidType")
+    @PostMapping("/addition")
     public void addPaidType(@RequestBody PaidTypeDetailsRequestModel paidTypeDRM) {
         PaidType paidType = new PaidType();
         paidType.setName(paidTypeDRM.getName());
@@ -52,7 +52,7 @@ public class PaidTypeController {
         log.info("Add " + paidType.toString());
     }
 
-    @DeleteMapping("/deletePaidType")
+    @DeleteMapping("/deletion")
     public void deletePaidType(@RequestParam Integer paidTypeId) {
         PaidType paidType = paidTypeService.findPaidTypeById(paidTypeId);
         if (!paidType.getCustomers().isEmpty()) log.error("This paid type hase customer");
@@ -63,7 +63,7 @@ public class PaidTypeController {
     }
 
 
-    @PutMapping("/updatePaidType")
+    @PutMapping("/renewal")
     public void updatePaidType(@RequestParam Integer paidTypeId, @RequestBody PaidTypeDetailsRequestModel paidTypeDRM) {
         PaidType paidType = paidTypeService.findPaidTypeById(paidTypeId);
         paidType.setName(paidTypeDRM.getName());

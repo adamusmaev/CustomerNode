@@ -2,6 +2,7 @@ package com.services;
 
 import com.entities.Address;
 import com.entities.Customer;
+import com.entities.PaidType;
 import com.repo.AddressRepo;
 import com.repo.CustomerRepo;
 import lombok.extern.log4j.Log4j;
@@ -38,5 +39,4 @@ public class CustomerService {
         Address address = customer.getAddress();
         customerRepo.delete(customer);
     }
-
 }

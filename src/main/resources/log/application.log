@@ -1,0 +1,55 @@
+2021-04-05 09:47:32 ERROR CustomerService:20 - java.lang.IllegalArgumentException: Customer not found
+2021-04-05 11:14:01 ERROR PaidTypeController:43 - Delete error
+2021-04-05 11:14:42 ERROR PaidTypeController:43 - Delete error
+2021-04-05 11:16:03 ERROR PaidTypeService:19 - java.lang.IllegalArgumentException: PaidType not found
+2021-04-05 11:16:03 ERROR PaidTypeController:42 - java.lang.IllegalArgumentException: PaidType not found
+2021-04-05 11:17:07 ERROR PaidTypeController:43 - Delete error
+2021-04-05 11:18:23 ERROR PaidTypeController:44 - Delete error
+2021-04-05 11:18:23 INFO  PaidTypeController:45 - []
+2021-04-05 11:25:43 ERROR PaidTypeService:21 - java.lang.IllegalArgumentException: PaidType not found
+2021-04-05 11:25:43 ERROR PaidTypeController:48 - java.lang.IllegalArgumentException: PaidType not found
+2021-04-05 11:26:49 ERROR PaidTypeService:21 - java.lang.IllegalArgumentException: PaidType not found
+2021-04-05 11:26:49 ERROR PaidTypeController:49 - java.lang.IllegalArgumentException: PaidType not found
+2021-04-05 11:52:49 INFO  PaidTypeController:62 - 11
+2021-04-05 11:52:49 INFO  PaidTypeController:63 - new name
+2021-04-05 12:24:15 INFO  CustomerController:25 - 3
+2021-04-05 12:24:15 ERROR CustomerService:24 - java.lang.IllegalArgumentException: Customer not found
+2021-04-05 13:07:54 INFO  AddressController:31 -  saratov
+2021-04-05 15:28:28 INFO  CustomerController:42 - 333
+2021-04-05 15:31:02 INFO  CustomerController:48 - 3
+2021-04-05 16:07:41 INFO  CustomerController:29 - 
+2021-04-05 16:08:49 INFO  CustomerController:35 - []
+2021-04-07 09:52:20 INFO  PaidTypeController:58 - @RequestBody
+2021-04-07 09:52:55 INFO  PaidTypeController:58 - @RequestBody
+2021-04-07 09:53:27 INFO  PaidTypeController:58 - @RequestBody
+2021-04-07 09:53:51 INFO  PaidTypeController:58 - @RequestBody
+2021-04-07 09:54:00 INFO  PaidTypeController:58 - @RequestBody
+2021-04-07 11:28:34 INFO  AddressController:35 - Add Address(id=3, city=moskow, state=mos., country=russia, customer=null)
+2021-04-07 11:38:27 INFO  CustomerController:47 - Add Customer(id=2, firstName=Pavel, lastName=null, email=pl@mail.ru, password=12345, phoneNumber=8083202382, address=null, paidTypes=null)
+2021-04-07 11:41:44 INFO  CustomerController:47 - Add Customer(id=3, firstName=Pavel, lastName=Laptev, email=p1l@mail.ru, password=12345, phoneNumber=8083201382, address=null, paidTypes=null)
+2021-04-07 12:05:47 INFO  CustomerController:47 - Add Customer(id=1, firstName=Pavel, lastName=Laptev, email=p1l@mail.ru, password=12345, phoneNumber=8083201382, address=null, paidTypes=null)
+2021-04-07 12:05:56 INFO  CustomerController:47 - Add Customer(id=2, firstName=Pavel, lastName=Laptev, email=pl@mail.ru, password=12345, phoneNumber=8083401382, address=null, paidTypes=null)
+2021-04-07 12:06:18 INFO  CustomerController:47 - Add Customer(id=3, firstName=Adam, lastName=Usmaev, email=au@mail.ru, password=12345, phoneNumber=88005553555, address=null, paidTypes=null)
+2021-04-07 12:07:51 INFO  AddressController:35 - Add Address(id=1, city=null, state=sar., country= russia, customer=null)
+2021-04-07 12:08:07 INFO  AddressController:35 - Add Address(id=2, city=saratov, state=sar., country= russia, customer=null)
+2021-04-07 12:09:57 INFO  AddressController:35 - Add Address(id=3, city=saratov, state=sar., country= russia, customer=null)
+2021-04-07 12:11:34 INFO  AddressController:35 - Add Address(id=4, city=saratov, state=sar., country= russia, customer=null)
+2021-04-07 12:26:06 INFO  PaidTypeController:52 - Add PaidType(id=1, name=name1, customers=null)
+2021-04-07 12:26:26 INFO  PaidTypeController:52 - Add PaidType(id=2, name=name2, customers=null)
+2021-04-07 12:26:30 INFO  PaidTypeController:52 - Add PaidType(id=3, name=name3, customers=null)
+2021-04-07 12:26:34 INFO  PaidTypeController:52 - Add PaidType(id=4, name=name4, customers=null)
+2021-04-07 12:26:39 INFO  PaidTypeController:52 - Add PaidType(id=5, name=name5, customers=null)
+2021-04-08 15:27:29 INFO  AddressController:35 - Add Address(id=5, city=moscow, state=mos., country=russia, customer=null)
+2021-04-08 16:35:40 INFO  CustomerController:55 - Add Customer(id=4, firstName=null, lastName=Ermilov, email=er@mail.ru, password=123, phoneNumber=38383932, address=null, paidTypes=null)
+2021-04-08 16:36:36 INFO  CustomerController:55 - Add Customer(id=5, firstName=Andrey, lastName=Ermilov, email=er@mail.ru, password=123, phoneNumber=38383932, address=null, paidTypes=null)
+2021-04-08 17:22:53 ERROR PaidTypeController:58 - This paid type hase customer
+2021-04-08 17:23:39 ERROR PaidTypeController:58 - This paid type hase customer
+2021-04-08 17:25:06 ERROR PaidTypeController:58 - This paid type hase customer
+2021-04-08 17:26:53 INFO  PaidTypeController:58 - []
+2021-04-08 17:26:53 ERROR PaidTypeController:59 - This paid type hase customer
+2021-04-08 17:27:52 INFO  PaidTypeController:58 - []
+2021-04-08 17:27:52 INFO  PaidTypeController:62 - Delete PaidType(id=2, name=name2, customers=[])
+2021-04-08 17:29:58 ERROR PaidTypeController:58 - This paid type hase customer
+2021-04-11 09:49:31 INFO  CustomerController:60 - Add Customer(id=6, firstName=Daniil, lastName=Ermilov, email=er@mail.ru, password=123, phoneNumber=38383932, address=null, paidTypes=null)
+2021-04-11 09:49:42 ERROR CustomerTransfer:28 - Customer:Customer(id=6, firstName=Daniil, lastName=Ermilov, email=er@mail.ru, password=123, phoneNumber=38383932, address=null, paidTypes=[]) doesn't have address
+2021-04-11 09:52:15 ERROR CustomerTransfer:28 - Customer:Customer(id=6, firstName=Daniil, lastName=Ermilov, email=er@mail.ru, password=123, phoneNumber=38383932, address=null, paidTypes=[]) doesn't have address

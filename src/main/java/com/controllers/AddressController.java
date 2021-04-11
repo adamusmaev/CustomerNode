@@ -2,20 +2,17 @@ package com.controllers;
 
 import com.detailsrequestmodel.AddressDetailsRequestModel;
 import com.entities.Address;
-import com.repo.AddressRepo;
 import com.services.AddressService;
 import com.transfers.AddressTransfer;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/address", produces = MediaType.APPLICATION_JSON_VALUE)
 @Log4j
 public class AddressController {
 
@@ -25,7 +22,7 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @PostMapping("/addAddress")
+    @PostMapping("/addition")
     public void addAddress(@RequestBody AddressDetailsRequestModel addressDRM) {
         Address address = new Address();
         address.setCity(addressDRM.getCity());
@@ -35,13 +32,13 @@ public class AddressController {
         log.info("Add " + address.toString());
     }
 
-    @GetMapping("/findAllAddresses")
+    @GetMapping("/search")
     @ResponseBody
     public List<AddressTransfer> findAllAddresses() {
         List<AddressTransfer> addressTransfers = new ArrayList<>();
         for (Address a : addressService.findAllAddresses()) {
-                AddressTransfer addressTransfer = new AddressTransfer(a);
-                addressTransfers.add(addressTransfer);
+            AddressTransfer addressTransfer = new AddressTransfer(a);
+            addressTransfers.add(addressTransfer);
         }
         return addressTransfers;
     }

@@ -9,6 +9,7 @@ import com.services.CustomerService;
 import com.entities.Customer;
 import com.services.PaidTypeService;
 import com.transfers.CustomerTransfer;
+import com.transfers.PaidTypeTransfer;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/customer", produces = MediaType.APPLICATION_JSON_VALUE)
 @Log4j
 public class CustomerController {
 
@@ -32,7 +33,7 @@ public class CustomerController {
         this.paidTypeService = paidTypeService;
     }
 
-    @GetMapping(value = "/findCustomer")
+    @GetMapping(value = "/search")
     @ResponseBody
     public CustomerTransfer findCustomer(@RequestParam Integer personId) {
         Customer customer = customerService.findCustomerById(personId);
@@ -40,7 +41,7 @@ public class CustomerController {
         return customerTransfer;
     }
 
-    @GetMapping("/findAllCustomer")
+    @GetMapping("/all")
     @ResponseBody
     public List<CustomerTransfer> findAll() {
         List<CustomerTransfer> customerTransfers = new ArrayList<>();
@@ -51,7 +52,7 @@ public class CustomerController {
         return customerTransfers;
     }
 
-    @PostMapping("/addCustomer")
+    @PostMapping("/addition")
     public void addCustomer(@RequestBody CustomerDetailsRequestModel customerDRM) {
         Customer customer = new Customer();
         customer.changeCustomer(customerDRM);
@@ -59,7 +60,7 @@ public class CustomerController {
         log.info("Add " + customer.toString());
     }
 
-    @PostMapping("/addAddressOfCustomer")
+    @PostMapping("/additionaddress")
     public void addAddressOfCustomer(@RequestParam Integer customerId,
                                      @RequestParam Integer addressId) {
         Address address = addressService.findAddress(addressId);
@@ -70,14 +71,14 @@ public class CustomerController {
         customerService.saveCustomer(customer);
     }
 
-    @PutMapping("/changeCustomer")
+    @PutMapping("/renewal")
     public void changeCustomer(@RequestParam Integer customerId, @RequestBody CustomerDetailsRequestModel customerDRM) {
         Customer customer = customerService.findCustomerById(customerId);
         customer.changeCustomer(customerDRM);
         customerService.saveCustomer(customer);
     }
 
-    @DeleteMapping("/deleteCustomer")
+    @DeleteMapping("/deletion")
     public void deleteCustomer(@RequestParam Integer customerId) {
         Customer customer = customerService.findCustomerById(customerId);
         Address address = customer.getAddress();
@@ -85,7 +86,7 @@ public class CustomerController {
         else customerService.deleteCustomer(customer);
     }
 
-    @PostMapping("/addPaidTypeForCustomer")
+    @PostMapping("/additionpaidtype")
     public void addPaidTypeForCustomer(@RequestParam Integer customerId, @RequestParam Integer paidTypeId) {
         Customer customer = customerService.findCustomerById(customerId);
         PaidType paidType = paidTypeService.findPaidTypeById(paidTypeId);
@@ -93,6 +94,18 @@ public class CustomerController {
         paidType.getCustomers().add(customer);
         customerService.saveCustomer(customer);
         paidTypeService.savePaidType(paidType);
+    }
+
+    @GetMapping(value = "/paidtypes")
+    public List<PaidTypeTransfer> findPaidTypes(@RequestParam Integer customerId)
+    {
+        Customer customer = customerService.findCustomerById(customerId);
+        Iterable<PaidType> paidTypes = customer.getPaidTypes();
+        List<PaidTypeTransfer> res = new ArrayList<>();
+        for (PaidType p : paidTypes) {
+            res.add(new PaidTypeTransfer(p));
+        }
+        return  res;
     }
 
 }
