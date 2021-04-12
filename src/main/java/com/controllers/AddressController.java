@@ -1,6 +1,6 @@
 package com.controllers;
 
-import com.detailsrequestmodel.AddressDetailsRequestModel;
+import com.detailsrequestmodels.AddressDetailsRequestModel;
 import com.entities.Address;
 import com.services.AddressService;
 import com.transfers.AddressTransfer;

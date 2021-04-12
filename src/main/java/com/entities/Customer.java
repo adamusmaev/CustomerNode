@@ -1,7 +1,7 @@
 package com.entities;
 
 
-import com.detailsrequestmodel.CustomerDetailsRequestModel;
+import com.detailsrequestmodels.CustomerDetailsRequestModel;
 import lombok.Data;
 import org.hibernate.annotations.NaturalId;
 

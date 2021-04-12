@@ -1,12 +1,14 @@
 package com.controllers;
 
 
-import com.detailsrequestmodel.CustomerDetailsRequestModel;
+
+
+import com.detailsrequestmodels.CustomerDetailsRequestModel;
 import com.entities.Address;
+import com.entities.Customer;
 import com.entities.PaidType;
 import com.services.AddressService;
 import com.services.CustomerService;
-import com.entities.Customer;
 import com.services.PaidTypeService;
 import com.transfers.CustomerTransfer;
 import com.transfers.PaidTypeTransfer;
@@ -97,15 +99,13 @@ public class CustomerController {
     }
 
     @GetMapping(value = "/paidtypes")
-    public List<PaidTypeTransfer> findPaidTypes(@RequestParam Integer customerId)
-    {
+    public List<PaidTypeTransfer> findPaidTypes(@RequestParam Integer customerId) {
         Customer customer = customerService.findCustomerById(customerId);
         Iterable<PaidType> paidTypes = customer.getPaidTypes();
         List<PaidTypeTransfer> res = new ArrayList<>();
         for (PaidType p : paidTypes) {
             res.add(new PaidTypeTransfer(p));
         }
-        return  res;
+        return res;
     }
-
 }

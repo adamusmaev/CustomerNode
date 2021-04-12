@@ -1,9 +1,7 @@
 package com.controllers;
 
-import com.detailsrequestmodel.PaidTypeDetailsRequestModel;
-import com.entities.Address;
+import com.detailsrequestmodels.PaidTypeDetailsRequestModel;
 import com.entities.PaidType;
-import com.repo.PaidTypeRepo;
 import com.services.PaidTypeService;
 import com.transfers.PaidTypeTransfer;
 import lombok.extern.log4j.Log4j;

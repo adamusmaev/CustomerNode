@@ -1,4 +1,4 @@
-package com.detailsrequestmodel;
+package com.detailsrequestmodels;
 
 import lombok.Data;
 
