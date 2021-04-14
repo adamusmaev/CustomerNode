@@ -1,9 +1,8 @@
 package com.services;
 
 import com.entities.Address;
-import com.repository.AddressRepo;
+import com.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,21 +10,21 @@ import org.springframework.stereotype.Service;
 public class AddressService {
 
 
-    private final AddressRepo addressRepo;
+    private final AddressRepository addressRepository;
 
     public void saveAddress(Address address) {
-        addressRepo.save(address);
+        addressRepository.save(address);
     }
 
     public Address findAddress(Integer id) {
-        return addressRepo.findAddressById(id);
+        return addressRepository.findAddressById(id);
     }
 
     public Iterable<Address> findAllAddresses() {
-        return addressRepo.findAll();
+        return addressRepository.findAll();
     }
     public void deleteAddress(Address address)
     {
-        addressRepo.delete(address);
+        addressRepository.delete(address);
     }
 }

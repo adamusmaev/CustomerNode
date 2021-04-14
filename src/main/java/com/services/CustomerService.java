@@ -2,11 +2,10 @@ package com.services;
 
 import com.entities.Address;
 import com.entities.Customer;
-import com.repository.AddressRepo;
-import com.repository.CustomerRepo;
+import com.repository.AddressRepository;
+import com.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,28 +14,28 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
 
 
-    private final CustomerRepo customerRepo;
+    private final CustomerRepository customerRepository;
 
-    private final AddressRepo addressRepo;
+    private final AddressRepository addressRepository;
 
     public Customer findCustomerById(Integer customerId) {
-        Customer customerTmp = customerRepo.findById(customerId).orElse(null);
+        Customer customerTmp = customerRepository.findById(customerId).orElse(null);
         //if (customerTmp == null) log.error(new IllegalArgumentException("Customer not found"));
         return customerTmp;
     }
 
     public void saveCustomer(Customer customer) {
-        customerRepo.save(customer);
+        customerRepository.save(customer);
     }
 
     public Iterable<Customer> findAllCustomers()
     {
-        return customerRepo.findAll();
+        return customerRepository.findAll();
     }
 
     public void deleteCustomer(Customer customer)
     {
         Address address = customer.getAddress();
-        customerRepo.delete(customer);
+        customerRepository.delete(customer);
     }
 }
