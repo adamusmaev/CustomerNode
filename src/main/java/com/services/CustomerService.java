@@ -2,22 +2,22 @@ package com.services;
 
 import com.entities.Address;
 import com.entities.Customer;
-import com.entities.PaidType;
-import com.repo.AddressRepo;
-import com.repo.CustomerRepo;
+import com.repository.AddressRepo;
+import com.repository.CustomerRepo;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @Log4j
+@RequiredArgsConstructor
 public class CustomerService {
 
-    @Autowired
-    CustomerRepo customerRepo;
 
-    @Autowired
-    AddressRepo addressRepo;
+    private final CustomerRepo customerRepo;
+
+    private final AddressRepo addressRepo;
 
     public Customer findCustomerById(Integer customerId) {
         Customer customerTmp = customerRepo.findById(customerId).orElse(null);

@@ -1,8 +1,5 @@
 package com.controllers;
 
-
-
-
 import com.detailsrequestmodels.CustomerDetailsRequestModel;
 import com.entities.Address;
 import com.entities.Customer;
@@ -35,12 +32,11 @@ public class CustomerController {
         this.paidTypeService = paidTypeService;
     }
 
-    @GetMapping(value = "/search")
+    @GetMapping(value = "/{personId}")
     @ResponseBody
-    public CustomerTransfer findCustomer(@RequestParam Integer personId) {
+    public CustomerTransfer findCustomer(@PathVariable Integer personId) {///-----
         Customer customer = customerService.findCustomerById(personId);
-        CustomerTransfer customerTransfer = new CustomerTransfer(customer);
-        return customerTransfer;
+        return new CustomerTransfer(customer);
     }
 
     @GetMapping("/all")
@@ -62,9 +58,9 @@ public class CustomerController {
         log.info("Add " + customer.toString());
     }
 
-    @PostMapping("/additionaddress")
-    public void addAddressOfCustomer(@RequestParam Integer customerId,
-                                     @RequestParam Integer addressId) {
+    @PostMapping("/{customerId}/addition/address/{addressId}")
+    public void addAddressOfCustomer(@PathVariable Integer customerId,
+                                     @PathVariable Integer addressId) {
         Address address = addressService.findAddress(addressId);
         Customer customer = customerService.findCustomerById(customerId);
         customer.setAddress(address);
@@ -73,23 +69,23 @@ public class CustomerController {
         customerService.saveCustomer(customer);
     }
 
-    @PutMapping("/renewal")
-    public void changeCustomer(@RequestParam Integer customerId, @RequestBody CustomerDetailsRequestModel customerDRM) {
+    @PutMapping("/{customerId}/renewal")
+    public void changeCustomer(@PathVariable Integer customerId, @RequestBody CustomerDetailsRequestModel customerDRM) {
         Customer customer = customerService.findCustomerById(customerId);
         customer.changeCustomer(customerDRM);
         customerService.saveCustomer(customer);
     }
 
-    @DeleteMapping("/deletion")
-    public void deleteCustomer(@RequestParam Integer customerId) {
+    @DeleteMapping("/{customerId}/deletion")
+    public void deleteCustomer(@PathVariable Integer customerId) {
         Customer customer = customerService.findCustomerById(customerId);
         Address address = customer.getAddress();
         if (address != null) addressService.deleteAddress(address);
         else customerService.deleteCustomer(customer);
     }
 
-    @PostMapping("/additionpaidtype")
-    public void addPaidTypeForCustomer(@RequestParam Integer customerId, @RequestParam Integer paidTypeId) {
+    @PostMapping("/{customerId}/addition/paidtype/{paidTypeId}")
+    public void addPaidTypeForCustomer(@PathVariable Integer customerId, @PathVariable Integer paidTypeId) {
         Customer customer = customerService.findCustomerById(customerId);
         PaidType paidType = paidTypeService.findPaidTypeById(paidTypeId);
         customer.getPaidTypes().add(paidType);

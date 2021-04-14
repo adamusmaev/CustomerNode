@@ -2,19 +2,19 @@ package com.services;
 
 
 import com.entities.PaidType;
-import com.repo.PaidTypeRepo;
+import com.repository.PaidTypeRepo;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-
 @Service
 @Log4j
+@RequiredArgsConstructor
 public class PaidTypeService {
 
-    @Autowired
-    PaidTypeRepo paidTypeRepo;
+
+    private final PaidTypeRepo paidTypeRepo;
 
     public PaidType findPaidTypeById(Integer paidTypeId) {
         PaidType paidType = paidTypeRepo.findById(paidTypeId).orElse(null);

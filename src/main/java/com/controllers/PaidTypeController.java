@@ -23,9 +23,9 @@ public class PaidTypeController {
         this.paidTypeService = paidTypeService;
     }
 
-    @GetMapping("/search")
+    @GetMapping("/{paidTypeId}")
     @ResponseBody
-    public PaidTypeTransfer findPaidTypeById(@RequestBody Integer paidTypeId) {
+    public PaidTypeTransfer findPaidTypeById(@PathVariable Integer paidTypeId) {
         PaidType paidType = paidTypeService.findPaidTypeById(paidTypeId);
         PaidTypeTransfer paidTypeTransfer = new PaidTypeTransfer(paidType);
         return paidTypeTransfer;
@@ -50,8 +50,8 @@ public class PaidTypeController {
         log.info("Add " + paidType.toString());
     }
 
-    @DeleteMapping("/deletion")
-    public void deletePaidType(@RequestParam Integer paidTypeId) {
+    @DeleteMapping("/{paidTypeId}/deletion")
+    public void deletePaidType(@PathVariable Integer paidTypeId) {
         PaidType paidType = paidTypeService.findPaidTypeById(paidTypeId);
         if (!paidType.getCustomers().isEmpty()) log.error("This paid type hase customer");
         else {
@@ -59,10 +59,8 @@ public class PaidTypeController {
             log.info("Delete paid type");
         }
     }
-
-
-    @PutMapping("/renewal")
-    public void updatePaidType(@RequestParam Integer paidTypeId, @RequestBody PaidTypeDetailsRequestModel paidTypeDRM) {
+    @PutMapping("/{paidTypeId}/renewal")
+    public void updatePaidType(@PathVariable Integer paidTypeId, @RequestBody PaidTypeDetailsRequestModel paidTypeDRM) {
         PaidType paidType = paidTypeService.findPaidTypeById(paidTypeId);
         paidType.setName(paidTypeDRM.getName());
         paidTypeService.savePaidType(paidType);

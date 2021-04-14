@@ -1,4 +1,4 @@
-package com.repo;
+package com.repository;
 
 import com.entities.Address;
 import org.springframework.data.repository.CrudRepository;

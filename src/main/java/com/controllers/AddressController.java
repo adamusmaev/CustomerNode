@@ -32,7 +32,7 @@ public class AddressController {
         log.info("Add " + address.toString());
     }
 
-    @GetMapping("/search")
+    @GetMapping("/all")
     @ResponseBody
     public List<AddressTransfer> findAllAddresses() {
         List<AddressTransfer> addressTransfers = new ArrayList<>();
