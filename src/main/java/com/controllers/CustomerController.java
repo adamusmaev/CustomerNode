@@ -69,14 +69,14 @@ public class CustomerController {
         customerService.saveCustomer(customer);
     }
 
-    @PutMapping("/{customerId}/renewal")
+    @PutMapping("/{customerId}")
     public void changeCustomer(@PathVariable Integer customerId, @RequestBody CustomerDetailsRequestModel customerDRM) {
         Customer customer = customerService.findCustomerById(customerId);
         customer.changeCustomer(customerDRM);
         customerService.saveCustomer(customer);
     }
 
-    @DeleteMapping("/{customerId}/deletion")
+    @DeleteMapping("/{customerId}") //------
     public void deleteCustomer(@PathVariable Integer customerId) {
         Customer customer = customerService.findCustomerById(customerId);
         Address address = customer.getAddress();
