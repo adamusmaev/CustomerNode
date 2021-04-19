@@ -46,8 +46,42 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>7.8.1</version>
+            </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
+    <profiles>
+        <profile>
+            <id>js-flyway</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!--common properties for database connection-->
+                <db.driver>com.mysql.jdbc.Driver</db.driver>
+                <db.url>jdbc:mysql://localhost:3306?useUnicode=true;useJDBCCompliantTimezoneShift=true;useLegacyDatetimeCode=false;serverTimezone=UTC</db.url>
+                <db.schema>customernode</db.schema>
+                <db.adm.user>root</db.adm.user>
+                <db.adm.pass>1234</db.adm.pass>
+
+                <!-- Properties are prefixed with flyway. -->
+                <flyway.user>${db.adm.user}</flyway.user>
+                <flyway.password>${db.adm.pass}</flyway.password>
+                <flyway.schemas>${db.schema}</flyway.schemas>
+                <flyway.driver>${db.driver}</flyway.driver>
+                <flyway.url>${db.url}</flyway.url>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
