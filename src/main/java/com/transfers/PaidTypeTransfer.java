@@ -6,10 +6,11 @@ import lombok.Data;
 @Data
 public class PaidTypeTransfer {
 
+    private Integer id;
     private String name;
 
-    public PaidTypeTransfer(PaidType paidType)
-    {
+    public PaidTypeTransfer(PaidType paidType) {
+        this.id = paidType.getId();
         this.name = paidType.getName();
     }
 
