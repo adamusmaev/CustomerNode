@@ -18,6 +18,10 @@ public class CustomerTransfer {
     private String password;
     private String phoneNumber;
     private AddressTransfer addressTransfer;
+
+    public CustomerTransfer() {
+    }
+
     private List<PaidTypeTransfer> paidTypeTransfers = new ArrayList<>();
 
     public CustomerTransfer(Customer customer) {
@@ -30,8 +34,8 @@ public class CustomerTransfer {
         this.phoneNumber = customer.getPhoneNumber();
         if (customer.getAddress() == null) log.error("Customer:" + customer.toString() + " doesn't have address");
         else this.addressTransfer = new AddressTransfer(customer.getAddress());
-        for (PaidType p : customer.getPaidTypes()) {
-            paidTypeTransfers.add(new PaidTypeTransfer(p));
-        }
+        //for (PaidType p : customer.getPaidTypes()) {
+        //    paidTypeTransfers.add(new PaidTypeTransfer(p));
+        //}
     }
 }

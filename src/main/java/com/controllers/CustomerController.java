@@ -7,6 +7,7 @@ import com.entities.PaidType;
 import com.services.AddressService;
 import com.services.CustomerService;
 import com.services.PaidTypeService;
+import com.transfers.AddressTransfer;
 import com.transfers.CustomerTransfer;
 import com.transfers.PaidTypeTransfer;
 import lombok.extern.log4j.Log4j;
@@ -44,8 +45,21 @@ public class CustomerController {
     public List<CustomerTransfer> findAll() {
         List<CustomerTransfer> customerTransfers = new ArrayList<>();
         for (Customer c : customerService.findAllCustomers()) {
-            CustomerTransfer customerTransfer = new CustomerTransfer(c);
+            CustomerTransfer customerTransfer = new CustomerTransfer();
+            customerTransfer.setId(c.getId());
+            customerTransfer.setEmail(c.getEmail());
+            customerTransfer.setFirstName(c.getFirstName());
+            customerTransfer.setLastName(c.getLastName());
+            customerTransfer.setPassword(c.getPassword());
+            customerTransfer.setPhoneNumber(c.getPhoneNumber());
             customerTransfers.add(customerTransfer);
+            if (c.getAddress() != null) customerTransfer.setAddressTransfer(new AddressTransfer(c.getAddress()));
+            List<PaidTypeTransfer> paidTypeTransferList = new ArrayList<>();
+            for (PaidType p : c.getPaidTypes()){
+                PaidTypeTransfer paidTypeTransfer = new PaidTypeTransfer(p);
+                paidTypeTransferList.add(paidTypeTransfer);
+            }
+            customerTransfer.setPaidTypeTransfers(paidTypeTransferList);
         }
         return customerTransfers;
     }
@@ -76,7 +90,7 @@ public class CustomerController {
         customerService.saveCustomer(customer);
     }
 
-    @DeleteMapping("/{customerId}") //------
+    @DeleteMapping("/{customerId}")
     public void deleteCustomer(@PathVariable Integer customerId) {
         Customer customer = customerService.findCustomerById(customerId);
         Address address = customer.getAddress();
@@ -94,8 +108,8 @@ public class CustomerController {
         paidTypeService.savePaidType(paidType);
     }
 
-    @GetMapping(value = "/paidtypes")
-    public List<PaidTypeTransfer> findPaidTypes(@RequestParam Integer customerId) {
+    @GetMapping(value = "/{customerId}/paidtypes")
+    public List<PaidTypeTransfer> findPaidTypes(@PathVariable Integer customerId) {
         Customer customer = customerService.findCustomerById(customerId);
         Iterable<PaidType> paidTypes = customer.getPaidTypes();
         List<PaidTypeTransfer> res = new ArrayList<>();

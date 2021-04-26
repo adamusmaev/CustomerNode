@@ -50,7 +50,7 @@ public class PaidTypeController {
         log.info("Add " + paidType.toString());
     }
 
-    @DeleteMapping("/{paidTypeId}/deletion")
+    @DeleteMapping("/{paidTypeId}")
     public void deletePaidType(@PathVariable Integer paidTypeId) {
         PaidType paidType = paidTypeService.findPaidTypeById(paidTypeId);
         if (!paidType.getCustomers().isEmpty()) log.error("This paid type hase customer");
