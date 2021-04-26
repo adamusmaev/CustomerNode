@@ -53,7 +53,7 @@ public class CustomerController {
     @PostMapping
     public void addCustomer(@RequestBody CustomerDetailsRequestModel customerDRM) {
         Customer customer = new Customer();
-        customer.changeCustomer(customerDRM);
+        customer.addCustomer(customerDRM);
         customerService.saveCustomer(customer);
         log.info("Add " + customer.toString());
     }

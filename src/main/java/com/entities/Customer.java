@@ -42,12 +42,19 @@ public class Customer {
             inverseJoinColumns = @JoinColumn(name = "paidtype_id"))
     private Collection<PaidType> paidTypes;
 
-    public void changeCustomer(CustomerDetailsRequestModel customerDRM)
-    {
+    public void addCustomer(CustomerDetailsRequestModel customerDRM) {
         this.setFirstName(customerDRM.getFirstName());
         this.setLastName(customerDRM.getLastName());
         this.setEmail(customerDRM.getEmail());
         this.setPassword(customerDRM.getPassword());
         this.setPhoneNumber(customerDRM.getPhoneNumber());
+    }
+
+    public void changeCustomer(CustomerDetailsRequestModel customerDRM) {
+        this.setFirstName(customerDRM.getFirstName());
+        this.setLastName(customerDRM.getLastName());
+        //this.setEmail(customerDRM.getEmail());
+        this.setPassword(customerDRM.getPassword());
+        //this.setPhoneNumber(customerDRM.getPhoneNumber());
     }
 }
