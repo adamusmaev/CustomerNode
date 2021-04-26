@@ -39,7 +39,7 @@ public class CustomerController {
         return new CustomerTransfer(customer);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public List<CustomerTransfer> findAll() {
         List<CustomerTransfer> customerTransfers = new ArrayList<>();
@@ -50,7 +50,7 @@ public class CustomerController {
         return customerTransfers;
     }
 
-    @PostMapping("/addition")
+    @PostMapping
     public void addCustomer(@RequestBody CustomerDetailsRequestModel customerDRM) {
         Customer customer = new Customer();
         customer.changeCustomer(customerDRM);

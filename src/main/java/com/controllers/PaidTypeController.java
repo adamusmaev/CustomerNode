@@ -31,7 +31,7 @@ public class PaidTypeController {
         return paidTypeTransfer;
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public List<PaidTypeTransfer> findAll() {
         List<PaidTypeTransfer> paidTypeTransfers = new ArrayList<>();
@@ -42,7 +42,7 @@ public class PaidTypeController {
         return paidTypeTransfers;
     }
 
-    @PostMapping("/addition")
+    @PostMapping
     public void addPaidType(@RequestBody PaidTypeDetailsRequestModel paidTypeDRM) {
         PaidType paidType = new PaidType();
         paidType.setName(paidTypeDRM.getName());
@@ -59,7 +59,7 @@ public class PaidTypeController {
             log.info("Delete paid type");
         }
     }
-    @PutMapping("/{paidTypeId}/renewal")
+    @PutMapping("/{paidTypeId}")
     public void updatePaidType(@PathVariable Integer paidTypeId, @RequestBody PaidTypeDetailsRequestModel paidTypeDRM) {
         PaidType paidType = paidTypeService.findPaidTypeById(paidTypeId);
         paidType.setName(paidTypeDRM.getName());

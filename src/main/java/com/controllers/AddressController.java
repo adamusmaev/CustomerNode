@@ -22,7 +22,7 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @PostMapping("/addition")
+    @PostMapping
     public void addAddress(@RequestBody AddressDetailsRequestModel addressDRM) {
         Address address = new Address();
         address.setCity(addressDRM.getCity());
@@ -32,7 +32,7 @@ public class AddressController {
         log.info("Add " + address.toString());
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @ResponseBody
     public List<AddressTransfer> findAllAddresses() {
         List<AddressTransfer> addressTransfers = new ArrayList<>();
