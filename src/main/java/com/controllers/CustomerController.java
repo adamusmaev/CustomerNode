@@ -38,7 +38,21 @@ public class CustomerController {
     @ResponseBody
     public CustomerTransfer findCustomer(@PathVariable Integer personId) {///-----
         Customer customer = customerService.findCustomerById(personId);
-        return new CustomerTransfer(customer);
+        CustomerTransfer customerTransfer = new CustomerTransfer();
+        customerTransfer.setId(customer.getId());
+        customerTransfer.setEmail(customer.getEmail());
+        customerTransfer.setFirstName(customer.getFirstName());
+        customerTransfer.setLastName(customer.getLastName());
+        customerTransfer.setPassword(customer.getPassword());
+        customerTransfer.setPhoneNumber(customer.getPhoneNumber());
+        if (customer.getAddress() != null) customerTransfer.setAddressTransfer(new AddressTransfer(customer.getAddress()));
+        List<PaidTypeTransfer> paidTypeTransferList = new ArrayList<>();
+        for (PaidType p : customer.getPaidTypes()){
+            PaidTypeTransfer paidTypeTransfer = new PaidTypeTransfer(p);
+            paidTypeTransferList.add(paidTypeTransfer);
+        }
+        customerTransfer.setPaidTypeTransfers(paidTypeTransferList);
+        return customerTransfer;
     }
 
     @GetMapping
