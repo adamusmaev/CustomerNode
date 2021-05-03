@@ -7,6 +7,7 @@ import com.entities.PaidType;
 import com.services.AddressService;
 import com.services.CustomerService;
 import com.services.PaidTypeService;
+import com.tokens.Token;
 import com.transfers.AddressTransfer;
 import com.transfers.CustomerTransfer;
 import com.transfers.PaidTypeTransfer;
@@ -117,5 +118,19 @@ public class CustomerController {
             res.add(new PaidTypeTransfer(p));
         }
         return res;
+    }
+
+    @GetMapping(value = "/{customerId}/token")
+    public String getToken(@PathVariable Integer customerId){
+        Customer customer = customerService.findCustomerById(customerId);
+        return Token.getToken(customer.getEmail(), customer.getPassword());
+    }
+
+    @GetMapping("/id")
+    public Integer getIdCustomer(@RequestParam String token){
+        if (!Token.checkToken(token)) throw new IllegalArgumentException();
+        log.info(Token.getEmail(token));
+        Customer customer = customerService.findCustomerByEmailAndPassword(Token.getEmail(token),Token.getPassword(token));
+        return customer.getId();
     }
 }

@@ -24,6 +24,10 @@ public class CustomerService {
         return customerTmp;
     }
 
+    public Customer findCustomerByEmailAndPassword(String email, String password){
+        return customerRepository.findCustomerByEmailAndPassword(email, password);
+    }
+
     public void saveCustomer(Customer customer) {
         customerRepository.save(customer);
     }
