@@ -36,7 +36,7 @@ public class CustomerController {
 
     @GetMapping(value = "/{personId}")
     @ResponseBody
-    public CustomerTransfer findCustomer(@PathVariable Integer personId) {///-----
+    public CustomerTransfer findCustomer(@PathVariable Integer personId) {
         Customer customer = customerService.findCustomerById(personId);
         CustomerTransfer customerTransfer = new CustomerTransfer();
         customerTransfer.setId(customer.getId());
